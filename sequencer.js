@@ -6,7 +6,7 @@ const lookahead = 25;
 const scheduleAheadTime = 0.1;
 let nextNoteTime = 0.0;
 let currNote = 0;
-let rythmArray = [1, 0, 1, 1]
+let rythmArray = [1, 1, 1, 1]
 let bpm = 120;
 let timer;
 
@@ -57,5 +57,44 @@ const nextNote = function() {
   }
 }
 
+//DOCUMENT ELEMENTS
+let sequencer1 = document.getElementById('sequencer-1');
+let sequencer2 = document.getElementById('sequencer-2');
+let sequencer3 = document.getElementById('sequencer-3');
+let sequencer4 = document.getElementById('sequencer-4');
+let seq1state = 1;
+let seq2state = 1;
+let seq3state = 1;
+let seq4state = 1;
+let playBtn = document.getElementById('playBtn');
+let stopBtn = document.getElementById('stopBtn');
+
+//EVENT LISTENERS
+sequencer1.addEventListener('click', e => {
+  e.preventDefault();
+  seq1state++;
+  if (seq1state === 2) {
+    seq1state = 0;
+    rythmArray[0] = seq1state;
+    sequencer1.style.backgroundColor = "gainsboro";
+  }
+  else {
+    rythmArray[0] = seq1state;
+    sequencer1.style.backgroundColor = "rosybrown";
+  }
+  console.log(rythmArray);
+})
+
+playBtn.addEventListener('click', e => {
+  e.preventDefault();
+  playRhythm();
+})
+
+stopBtn.addEventListener('click', e => {
+  e.preventDefault();
+  stopRhythm();
+})
+
 //MAIN CODE
 loadSound('hat.wav');
+

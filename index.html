@@ -4,10 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="style.css">
   <script src="sequencer.js" defer></script>
   <title>MDN Sequencer</title>
 </head>
 <body>
-  <button id="playBtn">play</button>
+  <div id="container">
+    <div id="sequencer-container">
+      <button class="sequencer" id="sequencer-1">1</button>
+      <button class="sequencer" id="sequencer-2">2</button>
+      <button class="sequencer" id="sequencer-3">3</button>
+      <button class="sequencer" id="sequencer-4">4</button>
+    </div>
+    <div id="sequencer-playstop">
+      <button id="playBtn">play</button>
+      <button id="stopBtn">stop</button>
+    </div>
+  </div>
 </body>
 </html>
