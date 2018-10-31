@@ -1,45 +1,61 @@
+//GLOBAL VARIABLES
 const AudioContext = window.AudioContext || window.webkitAudioContext;
 const context = new AudioContext();
 let buffer;
-let lookahead = 25;
-let scheduleAheadTime = 0.1;
+const lookahead = 25;
+const scheduleAheadTime = 0.1;
 let nextNoteTime = 0.0;
+let currNote = 0;
+let rythmArray = [1, 0, 1, 1]
 let bpm = 120;
+let timer;
 
-let loadSound = function(url) {
+//FUNCTION EXPRESSIONS
+const loadSound = function(url) {
   fetch(url)
-  .then(response => response.arrayBuffer())
-  .then(arrayBuffer => {
-  context.decodeAudioData(arrayBuffer, decoded => {
-    buffer = decoded;
-  });
+    .then(response => response.arrayBuffer())
+    .then(arrayBuffer => {
+    context.decodeAudioData(arrayBuffer, decoded => {
+      buffer = decoded;
+    });
 });
 }
 
-let play = function(time) {
+const play = function(time) {
   source = context.createBufferSource();
   source.connect(context.destination);
   source.buffer = buffer;
   source.start(time);
 }
 
-let playRhythm = function() {
-  nextNoteTime = context.currentTime;
+const playRhythm = function() {
+  nextNoteTime = context.currentTime + 0.005;
   scheduler();
 }
 
-let scheduler = function() {
+const stopRhythm = function() {
+  clearTimeout(timer);
+}
+
+const scheduler = function() {
   while (nextNoteTime < context.currentTime + scheduleAheadTime) {
-    play(nextNoteTime);
-    console.log('sup');
+    if (rythmArray[currNote] === 1) {
+      play(nextNoteTime);
+      console.log(currNote);
+    }
     nextNote();
   }
-  setTimeout(scheduler, lookahead);
+  timer = setTimeout(scheduler, lookahead);
 }
 
-let nextNote = function() {
+const nextNote = function() {
   const secondsPerBeat = 60 / bpm;
   nextNoteTime += secondsPerBeat;
+  currNote++;
+  if (currNote === 4) {
+    currNote = 0;
+  }
 }
 
+//MAIN CODE
 loadSound('hat.wav');
