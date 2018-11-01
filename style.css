@@ -22,12 +22,18 @@ html, body {
 /* ID DEFINITIONS */
 #container {
   align-items: center;
-  background-color: darkolivegreen;
+  background-color: darkslateblue;
   display: flex;
   flex-direction: column;
   height: 100vh;
   justify-content: center;
   width: 100vw;
+}
+
+#drop-zone {
+  border: 1px solid black;
+  height: 50px;
+  width: 50px;
 }
 
 #sequencer-container {
