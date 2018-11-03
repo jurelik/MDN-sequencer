@@ -1,0 +1,54 @@
+/* GLOBAL RULES */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: Helvetica, sans-serif;
+  font-size: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* CLASS DEFINITIONS */
+.sequencer {
+  background-color: rosybrown;
+  border: none;
+  height: 50px;
+  margin: 0 5px;
+  width: 50px;
+}
+
+/* ID DEFINITIONS */
+#container {
+  align-items: center;
+  background-color: darkslateblue;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  width: 100vw;
+}
+
+#drop-zone {
+  align-items: center;
+  border: 1px solid black;
+  display: flex;
+  height: 150px;
+  justify-content: center;
+  margin: 10px;
+  width: 300px;
+}
+
+#sequencer-container {
+  align-items: center;
+  /* border: 1px solid black; */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#sequencer-playstop {
+  /* border: 1px solid black; */
+  margin-top: 10px;
+}
