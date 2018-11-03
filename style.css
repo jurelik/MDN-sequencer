@@ -31,9 +31,13 @@ html, body {
 }
 
 #drop-zone {
+  align-items: center;
   border: 1px solid black;
-  height: 50px;
-  width: 50px;
+  display: flex;
+  height: 150px;
+  justify-content: center;
+  margin: 10px;
+  width: 300px;
 }
 
 #sequencer-container {

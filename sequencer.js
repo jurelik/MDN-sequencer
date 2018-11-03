@@ -9,6 +9,7 @@ let currNote = 0;
 let rythmArray = [1, 1, 1, 1]
 let bpm = 120;
 let timer;
+let isPlaying = false;
 
 //FUNCTION EXPRESSIONS
 const loadSound = function(url) {
@@ -29,12 +30,16 @@ const play = function(time) {
 }
 
 const playRhythm = function() {
-  nextNoteTime = context.currentTime + 0.005;
-  scheduler();
+  if (!isPlaying) {
+    nextNoteTime = context.currentTime + 0.005;
+    isPlaying = true;
+    scheduler();
+  }
 }
 
 const stopRhythm = function() {
   clearTimeout(timer);
+  isPlaying = false;
 }
 
 const scheduler = function() {
@@ -49,7 +54,7 @@ const scheduler = function() {
 }
 
 const nextNote = function() {
-  const secondsPerBeat = 60 / bpm;
+  const secondsPerBeat = 60 / bpm / 2;
   nextNoteTime += secondsPerBeat;
   currNote++;
   if (currNote === 4) {
@@ -61,6 +66,8 @@ const nextNote = function() {
 const dragHandler = function(e) {
   e.stopPropagation();
   e.preventDefault();
+
+  e.dataTransfer.dropEffect = "copy";
 }
 
 const dropHandler = function(e) {
@@ -76,7 +83,6 @@ const dropHandler = function(e) {
     })
   }
   reader.readAsArrayBuffer(file[0]);
-  console.log('dropped');
 }
 
 //DOCUMENT ELEMENTS
@@ -109,6 +115,51 @@ sequencer1.addEventListener('click', e => {
   console.log(rythmArray);
 })
 
+sequencer2.addEventListener('click', e => {
+  e.preventDefault();
+  seq2state++;
+  if (seq2state === 2) {
+    seq2state = 0;
+    rythmArray[1] = seq2state;
+    sequencer2.style.backgroundColor = "gainsboro";
+  }
+  else {
+    rythmArray[1] = seq2state;
+    sequencer2.style.backgroundColor = "rosybrown";
+  }
+  console.log(rythmArray);
+})
+
+sequencer3.addEventListener('click', e => {
+  e.preventDefault();
+  seq3state++;
+  if (seq3state === 2) {
+    seq3state = 0;
+    rythmArray[2] = seq3state;
+    sequencer3.style.backgroundColor = "gainsboro";
+  }
+  else {
+    rythmArray[2] = seq3state;
+    sequencer3.style.backgroundColor = "rosybrown";
+  }
+  console.log(rythmArray);
+})
+
+sequencer4.addEventListener('click', e => {
+  e.preventDefault();
+  seq4state++;
+  if (seq4state === 2) {
+    seq4state = 0;
+    rythmArray[3] = seq4state;
+    sequencer4.style.backgroundColor = "gainsboro";
+  }
+  else {
+    rythmArray[3] = seq4state;
+    sequencer4.style.backgroundColor = "rosybrown";
+  }
+  console.log(rythmArray);
+})
+
 playBtn.addEventListener('click', e => {
   e.preventDefault();
   playRhythm();
@@ -121,7 +172,11 @@ stopBtn.addEventListener('click', e => {
 
 dropZone.addEventListener('dragover', dragHandler);
 dropZone.addEventListener('drop', dropHandler);
+window.addEventListener('dragover', e => {
+  e.preventDefault();
+  e.dataTransfer.dropEffect = "none";
+});
 
 //MAIN CODE
-loadSound('hat.wav');
+// loadSound('hat.wav');
 
