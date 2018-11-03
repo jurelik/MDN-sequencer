@@ -57,6 +57,28 @@ const nextNote = function() {
   }
 }
 
+//DRAG AND DROP
+const dragHandler = function(e) {
+  e.stopPropagation();
+  e.preventDefault();
+}
+
+const dropHandler = function(e) {
+  e.stopPropagation();
+  e.preventDefault();
+
+  const file = e.dataTransfer.files;
+
+  const reader = new FileReader();
+  reader.onload = function() {
+    context.decodeAudioData(reader.result, decoded => {
+      buffer = decoded;
+    })
+  }
+  reader.readAsArrayBuffer(file[0]);
+  console.log('dropped');
+}
+
 //DOCUMENT ELEMENTS
 let sequencer1 = document.getElementById('sequencer-1');
 let sequencer2 = document.getElementById('sequencer-2');
@@ -68,6 +90,8 @@ let seq3state = 1;
 let seq4state = 1;
 let playBtn = document.getElementById('playBtn');
 let stopBtn = document.getElementById('stopBtn');
+
+let dropZone = document.getElementById('drop-zone');
 
 //EVENT LISTENERS
 sequencer1.addEventListener('click', e => {
@@ -94,6 +118,9 @@ stopBtn.addEventListener('click', e => {
   e.preventDefault();
   stopRhythm();
 })
+
+dropZone.addEventListener('dragover', dragHandler);
+dropZone.addEventListener('drop', dropHandler);
 
 //MAIN CODE
 loadSound('hat.wav');

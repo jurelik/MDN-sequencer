@@ -2,8 +2,6 @@ const AudioContext = window.AudioContext || window.webkitAudioContext;
 const context = new AudioContext();
 let buffer;
 
-
-
 // let choose = document.getElementById('fileChoose');
 // choose.addEventListener('change', e => {
 //   console.log(choose.files);
